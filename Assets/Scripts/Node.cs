@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-  [SerializeField] private TextMeshPro _text;
+    [SerializeField] private TextMeshPro _text;
 
-  public Vector2 Pos => transform.position;
-  public Block OccupiedBlock;
+    public Vector2 Pos => transform.position;
+    public Block OccupiedBlock;
 
-  public void Init(string text)
-  {
-    _text.text = text.ToString();
-  }
+    public void Init(string text)
+    {
+        //_text.text = text.ToString();
+    }
 }
