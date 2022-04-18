@@ -12,8 +12,14 @@ public class StartSceneManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void OnRestartClick()
+    public void SoloModeSelect()
     {
+        PlayerPrefs.SetString("Mode", "solo");
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void CoopModeSelect()
+    {
+        PlayerPrefs.SetString("Mode", "coop");
         SceneManager.LoadScene("SampleScene");
     }
 }

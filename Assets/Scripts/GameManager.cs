@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,22 +15,41 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Node NodePrefab;
     [SerializeField] private Block BlockPrefab;
     [SerializeField] private SpriteRenderer BoardPrefab;
-    [SerializeField] private List<BlockType> types;
+    [SerializeField] private TextMeshProUGUI _text;
+    private GameMode _gameMode;
     private GameState state;
+    public static GameManager Instance;
     private int _round;
     private bool win = false;
     private int winning_value = 2048;
     private List<Node> nodes;
     private List<Block> blocks;
-    private BlockType getBlockTypeByValue(int value) => types.First(t => t.Value == value);
-
-
+    public GameState GetState => state;
+    public GameMode GetMode => _gameMode;
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         ChangeState(GameState.Generatelevel);
+        SetMode();
+        Debug.Log("mode: " + _gameMode);
     }
+    public void SetMode()
+    {
+        if (String.Compare(PlayerPrefs.GetString("Mode"), "solo") == 0)
+        {
+            _gameMode = GameMode.Solo;
+            _text.text = "";
+        }
+        else if (String.Compare(PlayerPrefs.GetString("Mode"), "coop") == 0)
+        {
+            _gameMode = GameMode.Coop;
+        }
 
-    private void ChangeState(GameState newState)
+    }
+    public void ChangeState(GameState newState)
     {
         state = newState;
         switch (newState)
@@ -40,6 +61,17 @@ public class GameManager : MonoBehaviour
                 SpawnBlocks(_round++ == 0 ? 2 : 1);
                 break;
             case GameState.WaitingInput:
+                if (_gameMode == GameMode.Coop)
+                {
+                    _text.text = "Waiting for keyboard player";
+                }
+                break;
+            case GameState.WaitingMouseInput:
+                if (_gameMode == GameMode.Coop)
+                {
+                    _text.text = "Waiting for mouse player";
+                }
+                break;
                 break;
             case GameState.Moving:
                 break;
@@ -55,6 +87,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log("modo: " + _gameMode);
         if (state != GameState.WaitingInput)
         {
             return;
@@ -109,7 +142,7 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.SpawningBlocks);
     }
 
-    void SpawnBlock(Node node, int value)
+    public void SpawnBlock(Node node, int value)
     {
         var block = Instantiate(BlockPrefab, node.Pos, Quaternion.identity);
         block.Init(value);
@@ -178,7 +211,14 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                ChangeState(GameState.SpawningBlocks);
+                if (_gameMode == GameMode.Coop)
+                {
+                    ChangeState(GameState.WaitingMouseInput);
+                }
+                if (_gameMode == GameMode.Solo)
+                {
+                    ChangeState(GameState.SpawningBlocks);
+                }
             }
         });
 
@@ -230,14 +270,11 @@ public class GameManager : MonoBehaviour
 
         return generatedNode;
     }
+    public void OnRestartClick()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 
-}
-
-[System.Serializable]
-public struct BlockType
-{
-    public int Value;
-    public Color Color;
 }
 
 public enum GameState
@@ -245,7 +282,13 @@ public enum GameState
     Generatelevel,
     SpawningBlocks,
     WaitingInput,
+    WaitingMouseInput,
     Moving,
     Win,
     Lose
+}
+public enum GameMode
+{
+    Solo,
+    Coop
 }
