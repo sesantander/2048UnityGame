@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Block BlockPrefab;
     [SerializeField] private SpriteRenderer BoardPrefab;
     [SerializeField] private TextMeshProUGUI _text;
+    AudioSource audioSource;
     private GameMode _gameMode;
     private GameState state;
     public static GameManager Instance;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.Generatelevel);
         SetMode();
         Debug.Log("mode: " + _gameMode);
+        audioSource = GetComponent<AudioSource>();  
     }
     public void SetMode()
     {
@@ -275,6 +277,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("StartScene");
     }
 
+    public void MuteSound()
+    {
+        audioSource.mute = true;
+    }
+    public void UnMuteSound()
+    {
+        audioSource.mute = false;
+    }
 }
 
 public enum GameState

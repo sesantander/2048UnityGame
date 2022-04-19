@@ -19,4 +19,9 @@ public class EndSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("StartScene");
     }
+
+    public void QuitGameClick()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
 }
