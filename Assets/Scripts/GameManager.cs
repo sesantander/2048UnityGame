@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Win:
                 PlayerPrefs.SetString("EndText", "You Won!");
+                SceneManager.LoadScene("EndScene");
                 break;
             case GameState.Lose:
                 PlayerPrefs.SetString("EndText", "You Lost");
@@ -87,7 +88,6 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log("modo: " + _gameMode);
         if (state != GameState.WaitingInput)
         {
             return;
