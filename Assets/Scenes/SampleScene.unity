@@ -158,6 +158,8 @@ MonoBehaviour:
   BlockPrefab: {fileID: 938774573387839953, guid: 9359f3596027ce544a55a87130842f75, type: 3}
   BoardPrefab: {fileID: 3679939666912577969, guid: aaf64f6d465dfa1488e6f515702abab2, type: 3}
   _text: {fileID: 2141624314}
+  boundingBoxPadding: 1
+  minimumOrthographicSize: 1
 --- !u!4 &263529871
 Transform:
   m_ObjectHideFlags: 0
@@ -547,14 +549,14 @@ RectTransform:
   m_GameObject: {fileID: 1071551392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.60972, y: 0.60972, z: 0.60972}
   m_Children: []
   m_Father: {fileID: 568223836}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 21, y: 21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1071551394

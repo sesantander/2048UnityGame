@@ -23,9 +23,9 @@ public class StartSceneManager : MonoBehaviour
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
 
-        while (valuebar!=0.9)
+        while (valuebar != 0.9)
         {
-            loadbar.value = (float)(valuebar  / 0.9f);
+            loadbar.value = (float)(valuebar / 0.9f);
             valuebar = valuebar + 0.1;
             WaitSomeTime(1000);
             yield return null;
@@ -44,6 +44,11 @@ public class StartSceneManager : MonoBehaviour
     public void CoopModeSelect()
     {
         PlayerPrefs.SetString("Mode", "coop");
+    }
+
+    public void VersusModeSelect()
+    {
+        PlayerPrefs.SetString("Mode", "versus");
     }
 
     public void QuitGameClick()
