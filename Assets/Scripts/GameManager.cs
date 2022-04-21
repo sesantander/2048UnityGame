@@ -136,40 +136,46 @@ public class GameManager : MonoBehaviour
         var downMovement = new Vector2(0f, -1f);
         if (state == GameState.WaitingInput)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (blocks.Count < 16)
             {
-                MoveBlocks(leftMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                MoveBlocks(rightMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                MoveBlocks(upMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                MoveBlocks(downMovement);
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    MoveBlocks(leftMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    MoveBlocks(rightMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    MoveBlocks(upMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    MoveBlocks(downMovement);
+                }
             }
         }
         if (stateVersus == GameStateVersus.WaitingVersusInput)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (blocks2.Count < 16)
             {
-                MoveVersusBlocks(leftMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                MoveVersusBlocks(rightMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                MoveVersusBlocks(upMovement);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                MoveVersusBlocks(downMovement);
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    MoveVersusBlocks(leftMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    MoveVersusBlocks(rightMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    MoveVersusBlocks(upMovement);
+                }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    MoveVersusBlocks(downMovement);
+                }
             }
         }
 
