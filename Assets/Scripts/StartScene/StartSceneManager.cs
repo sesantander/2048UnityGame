@@ -15,6 +15,13 @@ public class StartSceneManager : MonoBehaviour
 
     public void SceneLoad(int sceneIndex)
     {
+        var solo = GameObject.Find("Solo");
+        var coop = GameObject.Find("Coop");
+        var versus = GameObject.Find("Versus");
+        Destroy(solo);
+        Destroy(coop);
+        Destroy(versus);
+
         loadpanel.SetActive(true);
         StartCoroutine(LoadAsync(sceneIndex));
     }
